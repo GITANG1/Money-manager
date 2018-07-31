@@ -1,0 +1,59 @@
+<div fxLayout="column">
+
+  <div fxLayoutAlign="center center" fxLayout="column">
+    <div class="addTrx" fxLayout="column" fxFlexAlign="center center">
+
+      <p class="userinfo">To edit a existing transaction, please create one with the same name</p>
+
+      <mat-form-field class="input">
+        <input matInput placeholder="Item Name" color="primary" [(ngModel)]="item" name="item" required>
+      </mat-form-field>
+
+      <mat-form-field class="input">
+        <input matInput placeholder="amount spent" color="primary" [(ngModel)]="amount" name="amount" required>
+      </mat-form-field>
+
+      <mat-form-field class="input">
+        <input matInput [matDatepicker]="picker" [(ngModel)]="date" placeholder="Choose a date" required>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <div fxFlexAlign="center" style="padding: 1em">
+        <button mat-raised-button color="primary" (click)="addTransaction()">Add transaction</button>
+      </div>
+      <div *ngIf="dateinvalid" fxFlexAlign="center" style="padding: 1em" style="color: red">
+        Please choose a valid date
+        </div>
+
+    </div>
+  </div>
+
+
+  <div>
+   
+    <p>
+      Previous transactions:
+    </p>
+   
+    <div *ngFor="let transaction of transactions" fxLayout="column" style="padding: 1em">
+     
+      <div fxLayout="row">
+        
+        <div class="trx">
+          {{transaction.itemname}}
+        </div>
+        
+        <div class="trx">
+          ${{transaction.amount.Amount}}
+        </div>
+        
+        <div class="trx">
+          {{transaction.amount.Date}}
+        </div>
+       
+        <button mat-raised-button color="primary" (click)="deletetransaction(transaction.itemname)"> delete transaction</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,44 @@
+<div fxLayoutAlign="center center" fxFlexAlign="center center">
+
+  <div class="container" fxLayout="column" fxLayoutAlign="space-around start">
+    <mat-toolbar color="primary" layout="column" layout-align="center end">
+      <span style="margin:0 auto;">SIGN-UP</span>
+    </mat-toolbar>
+
+    <form #f="ngForm">
+      <div class="first line" fxLayout="row">
+        <mat-form-field style="padding-right: 1em;padding-left: 1em">
+          <input matInput placeholder="First name" name="firstName" [(ngModel)]="firstName" required>
+        </mat-form-field>
+        <mat-form-field style="padding-left: 1em">
+          <input matInput placeholder="Last name" [(ngModel)]="lastName" name="lastName" required>
+        </mat-form-field>
+      </div>
+
+      <div>
+        <mat-form-field style="padding-left: 1em;width: 100%">
+          <input matInput placeholder="Enter your email" [formControl]="email" [(ngModel)]="emailid" required>
+          <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div>
+        <mat-form-field style="padding-left: 1em;width: 100%">
+          <input type="password" matInput placeholder="Password" name="password" [(ngModel)]="password" required>
+        </mat-form-field>
+      </div>
+    </form>
+
+    <div fxFlexAlign="center" style="padding: 1em">
+      <button mat-raised-button (click)="registerUser()" color="primary">Register</button>
+    </div>
+    <div fxFlexAlign="center" style="padding: 1em">
+        <a routerLink="/email-login" routerLinkActive="active" class="create-account-txt">Already a user?
+          <strong>Login</strong>
+        </a>
+      </div>
+    <div *ngIf="passwordless" fxFlexAlign="center" style="padding: 1em;color: red">
+       Please choose a password greater than 6 characters.
+      </div>
+  </div>
+</div>

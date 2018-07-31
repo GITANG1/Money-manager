@@ -1,0 +1,22 @@
+<div fxFlexAlign="center center" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign.xs="center center" fxLayoutAlign.sm="center center"
+  fxLayoutAlign.gt-sm="center center">
+  <mat-toolbar color="primary">
+      <a mat-button routerLink="/home">
+    <span>
+      <img src="/src/assets/images/budgetlogo.png" height=41 width=41>
+    </span>
+    </a>
+    <a mat-button routerLink="/home">
+      <span class="fa fa-home fa-lg"></span> Home</a>
+    <a mat-button routerLink="/login">
+      <span class="fa fa-home fa-lg"></span> Login</a>   
+    <a *ngIf="getIsloggedIn()" mat-button routerLink="/profile">
+      <span class="fa fa-home fa-lg"></span>My Wallet</a>
+    <a *ngIf="!getIsloggedIn()" mat-button routerLink="/email-login">
+      <span class="fa fa-home fa-lg"></span>My wallet</a>
+    <a *ngIf="getIsloggedIn()" mat-button (click)="signOut()" routerLink="/profile">
+      <span class="fa fa-info fa-lg"></span> Sign-Out</a>
+      <a mat-button routerLink="/about">
+        <span class="fa fa-home fa-lg"></span> About us</a>
+  </mat-toolbar>
+</div>

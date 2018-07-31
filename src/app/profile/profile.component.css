@@ -1,0 +1,30 @@
+.trx{
+    padding:1em
+}
+.createCategory
+{
+    background-color:white;
+    margin: 2em
+}
+
+.summary{
+
+    background-color: white;
+    width:30%;
+    margin:2em;
+}
+
+.userinfo{
+   margin:1em;
+
+}
+
+.category{
+    margin:2em;
+background-color: white
+}
+
+.category_display
+{
+    margin: 1.5em
+}

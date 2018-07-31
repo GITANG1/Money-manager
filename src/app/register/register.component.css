@@ -1,0 +1,10 @@
+.container {
+   background-color: white; 
+    width: 35%;
+    margin-top: 2em; 
+}
+
+.sign-up-header{
+    font-size: 3em;
+    padding: 0.4em
+}

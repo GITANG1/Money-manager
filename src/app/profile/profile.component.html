@@ -1,0 +1,109 @@
+<div  fxLayoutAlign="center center" fxFlexAlign="center center" >
+    <p>Hi Welcome, to your wallet manager, 
+     here you can manage your expenses by categories them<br> you can create a new category in the left panel </p>
+  </div>
+<div fxLayout="row">
+ 
+
+  <div class="createCategory" fxLayout="column">
+    <p class="userinfo">
+     To edit budget for a category, create category with same name </p>
+    <mat-form-field style="padding-left: 1em;width: 80%">
+      <input matInput placeholder="Create new Budget Category" color="primary" [(ngModel)]="category" name="category" required>
+    </mat-form-field>
+    <mat-form-field style="padding-left: 1em;width: 80%">
+      <input matInput placeholder="Set monthly Budget" color="primary" [(ngModel)]="monthBudget" name="monthBudget" required>
+    </mat-form-field>
+    <div fxFlexAlign="center" style="padding: 1em">
+      <button mat-raised-button color="primary" (click)="createCategory()"> Create Category</button>
+    </div>
+    <div *ngIf="categorynotdefined" fxFlexAlign="center" style="padding: 1em;color: red">
+      category not entered
+    </div>
+    <div *ngIf="budgetnotdefined" fxFlexAlign="center" style="padding: 1em;color: red">
+      budget not defined
+    </div>
+    <div *ngIf="notanumber" fxFlexAlign="center" style="padding: 1em;color: red">
+        budget is invalid: Please enter a number
+      </div>
+  </div>
+
+  <div *ngIf="!nocategories" class="summary" fxLayoutAlign="center center" fxFlexAlign="center center" fxLayout="column">
+    <p class="userinfo">
+     Review transaction summary </p>
+    <div fxLayout="column" fxFlexAlign="center center">
+      <mat-form-field style="padding:0.5em">
+        <input matInput [matDatepicker]="fromDate" [(ngModel)]="fdate" placeholder="from" required>
+        <mat-datepicker-toggle matSuffix [for]="fromDate"></mat-datepicker-toggle>
+        <mat-datepicker #fromDate></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field style="padding:0.5em">
+        <input matInput [matDatepicker]="toDate" [(ngModel)]="tdate" placeholder="to" required>
+        <mat-datepicker-toggle matSuffix [for]="toDate"></mat-datepicker-toggle>
+        <mat-datepicker #toDate></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div style="padding-bottom:0.5em">
+      <button mat-raised-button color="primary" (click)="findtransactions()">Find transactions</button>
+    </div>
+    <div *ngIf="dateinvalid" style="padding-bottom:0.5em;color: red">
+       Please enter valid dates
+      </div>
+  </div>
+
+  <div style="width:60%" class="category" fxLayout="column">
+      <p class="userinfo">
+        Choose a category to manage transactions </p>
+      <table class="category_display" border="1" width="90%">
+        <tr>
+          <td>
+            Category
+          </td>
+          <td>
+            Remaining budget
+          </td>
+          <td>
+            Remove Category
+          </td>
+        </tr>
+ 
+        <tr *ngFor="let category of categories">
+          <td>
+            <button mat-button (click)="openCategory(category.category)">{{category.category}} </button>
+          </td>
+          <td *ngIf="category.budget.sum < 0" style="color: red">
+            ${{category.budget.sum}}
+          </td>
+          <td *ngIf="category.budget.sum > 0">
+            ${{category.budget.sum}}
+          </td>
+          <td>
+            <button mat-button (click)="deleteCategory(category.category)">delete</button>
+          </td>
+        </tr>
+      </table>
+   
+  
+    </div>
+
+
+</div>
+
+<div  fxLayoutAlign="center center" fxFlexAlign="center center" fxLayout="column">
+<p *ngIf="viewSummary">
+  Transaction Summary: Total spendings for the mentioned term... <b>${{totalSum}}</b>
+</p>
+<div *ngFor="let transaction of datedTransactions" fxLayout="column" style="padding: 1em">
+  <div fxLayout="row">
+    <div class="trx">
+      {{transaction.itemname}}
+    </div>
+    <div class="trx">
+      ${{transaction.amount.Amount}}
+    </div>
+    <div class="trx">
+      {{transaction.amount.Date}}
+    </div>
+  </div>
+</div>
+</div>
